@@ -82,21 +82,8 @@ const U = (() => {
     const [i, d] = s.split('.');
     return i.padStart(3, '0') + (d ? '.' + d : '') + '^\\circ';
   }
-  /** a x-hat + b y-hat (+ c z-hat) in LaTeX. Omits zero terms and unit coefficients. */
-  function ijk(v, fmt = num) {
-    const units = ['\\hat{\\imath}', '\\hat{\\jmath}', '\\hat{k}'];
-    let out = '';
-    v.forEach((c, i) => {
-      c = clean(c);
-      if (c === 0) return;
-      const neg = c < 0;
-      const a = Math.abs(c);
-      const coef = Math.abs(a - 1) < 1e-12 ? '' : fmt(a);
-      if (out === '') out += (neg ? '-' : '') + coef + units[i];
-      else out += (neg ? ' - ' : ' + ') + coef + units[i];
-    });
-    return out === '' ? '\\vec{0}' : out;
-  }
+  /** Component (bracket) form, e.g. (3, -4) or (2, 0, 5). CAPE does not use unit-vector notation. */
+  const ijk = (v, fmt = num) => tup(v, fmt);
   const col = (v, fmt = num) => `\\begin{pmatrix}${v.map(x => fmt(x)).join('\\\\')}\\end{pmatrix}`;
   const tup = (v, fmt = num) => `(${v.map(x => fmt(x)).join(',\\ ')})`;
   /** Wrap negatives in brackets for substitution lines. */

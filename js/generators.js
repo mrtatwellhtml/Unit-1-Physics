@@ -146,7 +146,7 @@ const G = (() => {
         q: `A car's velocity changes from ${u} m s⁻¹ on a bearing of ${m(brg(b1))} to ${v} m s⁻¹ on a bearing of ${m(brg(b2))} in ${num(t)} s. Find the change in velocity and the magnitude of the average acceleration.`,
         svg: U.vectors([{ v: U1, cls: 'v1', label: 'u' }, { v: V1, cls: 'v2', label: 'v' }, { from: U1, v: dv, cls: 'v3', label: 'Δv', dash: true }], { north: true, size: 240 }),
         fields: [N(`${m('|\\Delta\\vec{v}|')}`, M, 'm s⁻¹'), A(`Bearing of ${m('\\Delta\\vec{v}')}`, bb), N('Average acceleration', M / t, 'm s⁻²')],
-        steps: [`${m('\\Delta\\vec{v} = \\vec{v} - \\vec{u}')} (final − initial). Use east (${m('\\hat{\\imath}')}) and north (${m('\\hat{\\jmath}')}) components, ${m('d\\sin\\beta\\,\\hat{\\imath} + d\\cos\\beta\\,\\hat{\\jmath}')}.`,
+        steps: [`${m('\\Delta\\vec{v} = \\vec{v} - \\vec{u}')} (final − initial). Work in (east, north) components: a velocity ${m('d')} on bearing ${m('\\beta')} is ${m('(d\\sin\\beta,\\ d\\cos\\beta)')}.`,
           `${m(`\\vec{u} = ${ijk(U1, sf)}`)}, ${m(`\\vec{v} = ${ijk(V1, sf)}`)}.`,
           `${m(`\\Delta\\vec{v} = ${ijk(dv, sf)}`)}, so ${m(`|\\Delta\\vec{v}| = ${sf(M)}\\ \\text{m s}^{-1}`)}.`, bstep,
           `${m(`a = \\dfrac{|\\Delta\\vec{v}|}{t} = \\dfrac{${sf(M)}}{${num(t)}} = ${sf(M / t)}\\ \\text{m s}^{-2}`)}.`]
@@ -200,12 +200,12 @@ const G = (() => {
       const d = pick([int(3, 150), step(1.5, 40, 0.5)]), b = 5 * int(0, 71);
       const e = d * sin(b), n = d * cos(b);
       return {
-        q: `Write a displacement of ${num(d)} km on a bearing of ${m(brg(b))} in the form ${m('e\\hat{\\imath} + n\\hat{\\jmath}')}, where ${m('\\hat{\\imath}')} is 1 km east and ${m('\\hat{\\jmath}')} is 1 km north.`,
+        q: `Write a displacement of ${num(d)} km on a bearing of ${m(brg(b))} as east and north components (use negative values for west and south).`,
         svg: U.vectors([{ v: [e, n], cls: 'v1', label: `${num(d)} km` }], { north: true, size: 220 }),
         fields: [N(m('e') + ' (east)', e, 'km'), N(m('n') + ' (north)', n, 'km')],
         steps: [`For a bearing ${m('\\beta')}: east ${m('= d\\sin\\beta')}, north ${m('= d\\cos\\beta')} (note the swap compared with angles from ${m('+x')}).`,
           `${m(`e = ${num(d)}\\sin${b}^\\circ = ${sf(e)}`)}, ${m(`n = ${num(d)}\\cos${b}^\\circ = ${sf(n)}`)}.`,
-          `${m(`\\vec{d} = ${ijk([e, n], sf)}\\ \\text{km}`)}.`]
+          `So ${sf(Math.abs(e))} km ${e >= 0 ? 'east' : 'west'} and ${sf(Math.abs(n))} km ${n >= 0 ? 'north' : 'south'}.`]
       };
     } },
     { name: 'Angle from one component', level: 2, fn() {
@@ -393,13 +393,13 @@ const G = (() => {
   // ======================================================================
   const rv3 = (lo = -9, hi = 9) => { let v; do { v = [int(lo, hi), int(lo, hi), int(lo, hi)]; } while (v.filter(x => x !== 0).length < 2); return v; };
   const V7 = [
-    { name: 'Magnitude and unit vector (3-D)', level: 1, fn() {
-      const v = rv3(), M = mag(v), u = scale(1 / M, v);
+    { name: 'Magnitude of a 3-D vector', level: 1, fn() {
+      const v = rv3(), M = mag(v);
       return {
-        q: `For ${m(`\\vec{a} = ${ijk(v)}`)}, find ${m('|\\vec{a}|')} and the unit vector ${m('\\hat{a}')}.`,
-        fields: [N(m('|\\vec{a}|'), M), N(m('\\hat{a}') + ' — ' + m('\\hat{\\imath}') + ' part', u[0]), N(m('\\hat{\\jmath}') + ' part', u[1]), N(m('\\hat{k}') + ' part', u[2])],
-        steps: [`${m(`|\\vec{a}| = \\sqrt{${v.map(x => br(x) + '^2').join(' + ')}} = \\sqrt{${dot(v, v)}} = ${sf(M)}`)}.`,
-          `${m(`\\hat{a} = \\dfrac{\\vec{a}}{|\\vec{a}|} = ${ijk(u, sf)}`)}. You may type fractions, e.g. ${m(`${v[0]}/${Number.isInteger(M) ? M : `\\sqrt{${dot(v, v)}}`}`)} → <code>${v[0]}/${Number.isInteger(M) ? M : `sqrt(${dot(v, v)})`}</code>.`]
+        q: `Find the magnitude of ${m(`\\vec{a} = ${ijk(v)}`)}.`,
+        fields: [N(m('|\\vec{a}|'), M)],
+        steps: [`Pythagoras in three dimensions: ${m(`|\\vec{a}| = \\sqrt{${v.map(x => br(x) + '^2').join(' + ')}} = \\sqrt{${dot(v, v)}} = ${sf(M)}`)}.`,
+          'Never just add the components — square, add, then square-root.']
       };
     } },
     { name: 'Angles with the axes (direction cosines)', level: 1, fn() {
@@ -419,8 +419,8 @@ const G = (() => {
       const M = mag(v), K = int(2, 5) * Math.round(M), r = scale(K / M, v);
       return {
         q: `Find the vector of magnitude ${K} in the direction of ${m(ijk(v))}.`,
-        fields: [N(m('\\hat{\\imath}') + ' component', r[0]), N(m('\\hat{\\jmath}') + ' component', r[1]), N(m('\\hat{k}') + ' component', r[2])],
-        steps: [`${m(`|\\vec{v}| = \\sqrt{${dot(v, v)}} = ${num(M)}`)}.`, `Required vector ${m(`= ${K}\\hat{v} = \\dfrac{${K}}{${num(M)}}(${ijk(v)}) = ${ijk(r)}`)}.`]
+        fields: [N(m('x') + '-component', r[0]), N(m('y') + '-component', r[1]), N(m('z') + '-component', r[2])],
+        steps: [`${m(`|\\vec{v}| = \\sqrt{${dot(v, v)}} = ${num(M)}`)}.`, `Scale every component by ${m(`\\dfrac{${K}}{${num(M)}}`)} (this keeps the direction and makes the magnitude ${K}): ${m(`\\dfrac{${K}}{${num(M)}}${ijk(v)} = ${ijk(r)}`)}.`]
       };
     } },
     { name: 'Linear combinations', level: 1, fn() {
@@ -430,14 +430,14 @@ const G = (() => {
       const expr = coef(p, '\\vec{a}', true) + ' ' + coef(q, '\\vec{b}', false);
       return {
         q: `Given ${m(`\\vec{a} = ${ijk(a)}`)} and ${m(`\\vec{b} = ${ijk(b)}`)}, find ${m(expr)} and its magnitude.`,
-        fields: [N(m('\\hat{\\imath}'), r[0]), N(m('\\hat{\\jmath}'), r[1]), N(m('\\hat{k}'), r[2]), N('Magnitude', mag(r))],
+        fields: [N(m('x') + '-component', r[0]), N(m('y') + '-component', r[1]), N(m('z') + '-component', r[2]), N('Magnitude', mag(r))],
         steps: [`Component by component: ${m(`${expr} = ${ijk(r)}`)}.`, `Magnitude ${m(`= \\sqrt{${r.map(x => br(x) + '^2').join(' + ')}} = ${sf(mag(r))}`)}. Remember Pythagoras — never just add the components!`]
       };
     } },
     { name: 'Parallel vectors: find k', level: 2, fn() {
       const b = rv3(-8, 8).map(x => x || 2), lam = pick([-2, -0.5, 0.5, 2, 3, -3, 1.5]);
       const a = scale(lam, b), i = int(0, 2), k = a[i];
-      const aTex = ['\\hat{\\imath}', '\\hat{\\jmath}', '\\hat{k}'].map((u, j) => (j === i ? `k${u}` : `${num(a[j])}${u}`)).join(' + ').replace(/\+ -/g, '- ');
+      const aTex = tup(a.map((x, j) => (j === i ? 'k' : x)), x => (x === 'k' ? 'k' : num(x)));
       return {
         q: `Find the value of ${m('k')} for which ${m(`\\vec{a} = ${aTex}`)} is parallel to ${m(`\\vec{b} = ${ijk(b)}`)}.`,
         fields: [N(m('k'), k)],
@@ -520,9 +520,9 @@ const G = (() => {
       if (!mag(F) || !mag(s)) return this.fn();
       const W = dot(F, s);
       return {
-        q: `Find the work done by the constant force ${m(`\\vec{F} = (${ijk(F)})\\ \\text{N}`)} during the displacement ${m(`\\vec{s} = (${ijk(s)})\\ \\text{m}`)}.`,
+        q: `Find the work done by the constant force ${m(`\\vec{F} = ${ijk(F)}\\ \\text{N}`)} during the displacement ${m(`\\vec{s} = ${ijk(s)}\\ \\text{m}`)}.`,
         fields: [N(m('W'), W, 'J')],
-        steps: [`${m(`W = \\vec{F}\\cdot\\vec{s} = ${F.map((x, i) => `${br(x)}(${s[i]})`).join(' + ')} = ${W}\\ \\text{J}`)}.`, 'Work is a scalar — no ' + m('\\hat{\\imath},\\hat{\\jmath},\\hat{k}') + ' in the answer.']
+        steps: [`${m(`W = \\vec{F}\\cdot\\vec{s} = ${F.map((x, i) => `${br(x)}(${s[i]})`).join(' + ')} = ${W}\\ \\text{J}`)}.`, 'Work is a scalar — the answer is a single number with no direction.']
       };
     } },
     { name: 'Perpendicular vectors: find k', level: 1, fn() {
@@ -542,17 +542,17 @@ const G = (() => {
       const p = dot(a, b) / mag(b), vp = scale(dot(a, b) / dot(b, b), b);
       return {
         q: `Find (i) the scalar component (projection) of ${m(`\\vec{a} = ${ijk(a)}`)} in the direction of ${m(`\\vec{b} = ${ijk(b)}`)}, and (ii) the vector projection of ${m('\\vec{a}')} onto ${m('\\vec{b}')}.`,
-        fields: [N('(i) Scalar projection', p), N('(ii) ' + m('\\hat{\\imath}'), vp[0]), N(m('\\hat{\\jmath}'), vp[1]), N(m('\\hat{k}'), vp[2])],
+        fields: [N('(i) Scalar projection', p), N('(ii) ' + m('x') + '-component', vp[0]), N(m('y') + '-component', vp[1]), N(m('z') + '-component', vp[2])],
         steps: [`${m(`\\vec{a}\\cdot\\vec{b} = ${dot(a, b)}`)}, ${m(`|\\vec{b}| = ${sf(mag(b))}`)}.`,
           `(i) ${m(`\\dfrac{\\vec{a}\\cdot\\vec{b}}{|\\vec{b}|} = ${sf(p)}`)}.`,
-          `(ii) ${m(`\\dfrac{\\vec{a}\\cdot\\vec{b}}{|\\vec{b}|^2}\\vec{b} = \\dfrac{${dot(a, b)}}{${dot(b, b)}}(${ijk(b)}) = ${ijk(vp, sf)}`)}.`]
+          `(ii) ${m(`\\dfrac{\\vec{a}\\cdot\\vec{b}}{|\\vec{b}|^2}\\vec{b} = \\dfrac{${dot(a, b)}}{${dot(b, b)}}${ijk(b)} = ${ijk(vp, sf)}`)}.`]
       };
     } },
     { name: 'Power P = F·v', level: 2, fn() {
       const F = [100 * int(5, 30), 50 * nz(-10, 10), 0], v = [int(5, 30), nz(-5, 5), 0];
       const P = dot(F, v);
       return {
-        q: `A car engine delivers ${m(`\\vec{F} = (${ijk(F)})\\ \\text{N}`)} while the car moves with ${m(`\\vec{v} = (${ijk(v)})\\ \\text{m s}^{-1}`)}. Find the power delivered.`,
+        q: `A car engine delivers ${m(`\\vec{F} = ${ijk(F)}\\ \\text{N}`)} while the car moves with ${m(`\\vec{v} = ${ijk(v)}\\ \\text{m s}^{-1}`)}. Find the power delivered.`,
         fields: [N('Power', P, 'W')],
         steps: [`${m(`P = \\vec{F}\\cdot\\vec{v} = ${F[0]}(${v[0]}) + ${br(F[1])}(${v[1]}) = ${P}\\ \\text{W}`)} (${m(sf(P / 1000) + '\\ \\text{kW}')}).`, 'Only the component of the force along the velocity does work.']
       };
@@ -560,30 +560,20 @@ const G = (() => {
   ];
 
   // ======================================================================
-  const UNIT = ['\\hat{\\imath}', '\\hat{\\jmath}', '\\hat{k}'];
-  const UNIT_OPTS = [`\\(\\hat{\\imath}\\)`, `\\(-\\hat{\\imath}\\)`, `\\(\\hat{\\jmath}\\)`, `\\(-\\hat{\\jmath}\\)`, `\\(\\hat{k}\\)`, `\\(-\\hat{k}\\)`, `\\(\\vec{0}\\)`];
+  const AXIS = ['+x', '+y', '+z'];
+  const UNIT_OPTS = ['+x direction', '−x direction', '+y direction', '−y direction', '+z direction', '−z direction', 'Zero (no force)'];
   const unitOpt = v => { const i = v.findIndex(x => x !== 0); if (i < 0) return UNIT_OPTS[6]; return UNIT_OPTS[i * 2 + (v[i] < 0 ? 1 : 0)]; };
   const V10 = [
     { name: 'Cross product in components', level: 1, fn() {
       const a = rv3(-5, 5), b = rv3(-5, 5), c = cross(a, b);
       return {
         q: `Find ${m('\\vec{a}\\times\\vec{b}')} for ${m(`\\vec{a} = ${ijk(a)}`)} and ${m(`\\vec{b} = ${ijk(b)}`)}.`,
-        fields: [N(m('\\hat{\\imath}'), c[0]), N(m('\\hat{\\jmath}'), c[1]), N(m('\\hat{k}'), c[2])],
-        steps: [`${m(`\\begin{vmatrix}\\hat{\\imath} & \\hat{\\jmath} & \\hat{k}\\\\ ${a.join(' & ')}\\\\ ${b.join(' & ')}\\end{vmatrix}`)}`,
-          `${m('\\hat{\\imath}')}: ${m(`(${a[1]})(${b[2]}) - (${a[2]})(${b[1]}) = ${c[0]}`)}`,
-          `${m('\\hat{\\jmath}')}: ${m(`-[(${a[0]})(${b[2]}) - (${a[2]})(${b[0]})] = ${c[1]}`)} ← don't forget the minus!`,
-          `${m('\\hat{k}')}: ${m(`(${a[0]})(${b[1]}) - (${a[1]})(${b[0]}) = ${c[2]}`)}`,
+        fields: [N(m('x') + '-component', c[0]), N(m('y') + '-component', c[1]), N(m('z') + '-component', c[2])],
+        steps: [`Use ${m('\\vec{a}\\times\\vec{b} = (a_yb_z - a_zb_y,\\ a_zb_x - a_xb_z,\\ a_xb_y - a_yb_x)')}.`,
+          `${m('x')}: ${m(`(${a[1]})(${b[2]}) - (${a[2]})(${b[1]}) = ${c[0]}`)}`,
+          `${m('y')}: ${m(`(${a[2]})(${b[0]}) - (${a[0]})(${b[2]}) = ${c[1]}`)} ← note the order (z then x)`,
+          `${m('z')}: ${m(`(${a[0]})(${b[1]}) - (${a[1]})(${b[0]}) = ${c[2]}`)}`,
           `${m(`\\vec{a}\\times\\vec{b} = ${ijk(c)}`)}. Check: ${m(`(\\vec{a}\\times\\vec{b})\\cdot\\vec{a} = ${dot(c, a)}`)} ✓.`]
-      };
-    } },
-    { name: 'Unit vector cross products', level: 1, fn() {
-      const i = int(0, 2), j = int(0, 2);
-      const e = k => [0, 1, 2].map(x => (x === k ? 1 : 0));
-      const c = cross(e(i), e(j));
-      return {
-        q: `Evaluate ${m(`${UNIT[i]}\\times${UNIT[j]}`)}.`,
-        fields: [C('Answer', UNIT_OPTS, unitOpt(c))],
-        steps: [i === j ? 'A vector crossed with itself is the zero vector (sin 0° = 0).' : `Cyclic order ${m('\\hat{\\imath}\\to\\hat{\\jmath}\\to\\hat{k}\\to\\hat{\\imath}')} gives +; reversed order gives −. So ${m(`${UNIT[i]}\\times${UNIT[j]} = ${unitOpt(c).slice(2, -2)}`)}.`]
       };
     } },
     { name: 'Area of a triangle', level: 1, fn() {
@@ -602,9 +592,9 @@ const G = (() => {
       const r = rv3(-3, 3).map(x => x / pick([1, 10, 2])), F = rv3(-8, 8), t = cross(r, F);
       if (mag(t) === 0) return this.fn();
       return {
-        q: `A force ${m(`\\vec{F} = (${ijk(F)})\\ \\text{N}`)} acts at ${m(`\\vec{r} = (${ijk(r)})\\ \\text{m}`)} relative to a pivot. Find the torque ${m('\\vec{\\tau} = \\vec{r}\\times\\vec{F}')} and its magnitude.`,
+        q: `A force ${m(`\\vec{F} = ${ijk(F)}\\ \\text{N}`)} acts at ${m(`\\vec{r} = ${ijk(r)}\\ \\text{m}`)} relative to a pivot. Find the torque ${m('\\vec{\\tau} = \\vec{r}\\times\\vec{F}')} and its magnitude.`,
         fields: [N(m('\\tau_x'), t[0], 'N m'), N(m('\\tau_y'), t[1], 'N m'), N(m('\\tau_z'), t[2], 'N m'), N(m('|\\vec{\\tau}|'), mag(t), 'N m')],
-        steps: [`${m(`\\vec{\\tau} = \\begin{vmatrix}\\hat{\\imath} & \\hat{\\jmath} & \\hat{k}\\\\ ${r.map(x => num(x)).join(' & ')}\\\\ ${F.join(' & ')}\\end{vmatrix} = ${ijk(t)}\\ \\text{N m}`)}`,
+        steps: [`${m(`\\vec{\\tau} = (r_yF_z - r_zF_y,\\ r_zF_x - r_xF_z,\\ r_xF_y - r_yF_x) = ${ijk(t)}\\ \\text{N m}`)}`,
           `${m(`|\\vec{\\tau}| = ${sf(mag(t))}\\ \\text{N m}`)}.`]
       };
     } },
@@ -623,11 +613,11 @@ const G = (() => {
       const v = [0, 1, 2].map(x => (x === i ? vs : 0)), B = [0, 1, 2].map(x => (x === j ? Bs : 0));
       const Fv = scale(q, cross(v, B));
       return {
-        q: `A ${q > 0 ? 'proton' : 'electron'} (${m(`q = ${q > 0 ? '' : '-'}1.60\\times10^{-19}\\ \\text{C}`)}) moves with ${m(`\\vec{v} = ${vs / 1e5}\\times10^{5}\\,${UNIT[i]}\\ \\text{m s}^{-1}`)} through ${m(`\\vec{B} = ${num(Bs)}${UNIT[j]}\\ \\text{T}`)}. Find the magnitude and direction of ${m('\\vec{F} = q\\vec{v}\\times\\vec{B}')}.`,
+        q: `A ${q > 0 ? 'proton' : 'electron'} (${m(`q = ${q > 0 ? '' : '-'}1.60\\times10^{-19}\\ \\text{C}`)}) moves at ${m(`${vs / 1e5}\\times10^{5}\\ \\text{m s}^{-1}`)} in the ${m(AXIS[i])} direction through a magnetic field of ${num(Bs)} T in the ${m(AXIS[j])} direction. Find the magnitude and direction of ${m('\\vec{F} = q\\vec{v}\\times\\vec{B}')}.`,
         fields: [N('Magnitude', mag(Fv), 'N', { abs: 1e-30, sci: true }), C('Direction', UNIT_OPTS.slice(0, 6), unitOpt(Fv))],
-        steps: [`${m(`${UNIT[i]}\\times${UNIT[j]} = ${unitOpt(cross(v, B)).slice(2, -2)}`)}.`,
+        steps: [`Right-hand rule: fingers along ${m('\\vec{v}')} (${m(AXIS[i])}), curl towards ${m('\\vec{B}')} (${m(AXIS[j])}); the thumb gives ${m('\\vec{v}\\times\\vec{B}')} along the ${unitOpt(cross(v, B))}.`,
           `${m(`|\\vec{F}| = |q|vB = (1.60\\times10^{-19})(${vs / 1e5}\\times10^{5})(${num(Bs)}) = ${U.sci(mag(Fv))}\\ \\text{N}`)}. (To type ${m('4.80\\times10^{-14}')} write <code>4.80e-14</code>.)`,
-          q < 0 ? 'The charge is negative, so the force is reversed: ' + m(unitOpt(Fv).slice(2, -2)) + '.' : 'Positive charge: direction ' + m(unitOpt(Fv).slice(2, -2)) + '.']
+          q < 0 ? `The charge is negative, so the force is reversed: ${unitOpt(Fv)}.` : `Positive charge, so the force is along the ${unitOpt(Fv)}.`]
       };
     } }
   ];
@@ -790,7 +780,7 @@ const G = (() => {
       return {
         q: `Rain falls vertically at ${num(vr)} m s⁻¹. A person walks east at ${num(vw)} m s⁻¹. Find the speed of the rain relative to the person, and the angle to the vertical at which they should tilt the umbrella.`,
         fields: [N('Relative speed', Math.hypot(vr, vw), 'm s⁻¹'), A('Angle to vertical', atan(vw / vr))],
-        steps: [`${m(`\\vec{v}_{\\text{rain, person}} = \\vec{v}_{\\text{rain}} - \\vec{v}_{\\text{person}} = -${num(vw)}\\hat{\\imath} - ${num(vr)}\\hat{\\jmath}`)}.`,
+        steps: [`${m(`\\vec{v}_{\\text{rain, person}} = \\vec{v}_{\\text{rain}} - \\vec{v}_{\\text{person}} = (-${num(vw)},\\ -${num(vr)})`)} m s⁻¹, taking (east, up) components.`,
           `Speed ${m(`= \\sqrt{${num(vr)}^2 + ${num(vw)}^2} = ${sf(Math.hypot(vr, vw))}\\ \\text{m s}^{-1}`)}.`,
           `Angle ${m(`= \\tan^{-1}(${num(vw)}/${num(vr)}) = ${ang(atan(vw / vr))}^\\circ`)} to the vertical — tilt the umbrella forwards (towards the east).`]
       };
@@ -803,7 +793,7 @@ const G = (() => {
         q: `Car ${m('A')} drives north at ${a} m s⁻¹; car ${m('B')} drives east at ${b} m s⁻¹. Find the velocity of ${m('A')} relative to ${m('B')}.`,
         svg: U.vectors([{ v: [0, a], cls: 'v1', label: 'vA' }, { from: [0, a], v: [-b, 0], cls: 'v2', label: '−vB' }, { v: r, cls: 'v3', label: 'vAB', dash: true, labelSide: 'left' }], { north: true, size: 220 }),
         fields: [N('Magnitude', Math.hypot(a, b), 'm s⁻¹'), A('Bearing', bb)],
-        steps: [`${m(`\\vec{v}_{AB} = \\vec{v}_A - \\vec{v}_B = ${a}\\hat{\\jmath} - ${b}\\hat{\\imath}`)}.`, `Magnitude ${m(`\\sqrt{${a}^2 + ${b}^2} = ${sf(Math.hypot(a, b))}\\ \\text{m s}^{-1}`)}.`, bstep]
+        steps: [`${m(`\\vec{v}_{AB} = \\vec{v}_A - \\vec{v}_B = (0,\\ ${a}) - (${b},\\ 0) = (-${b},\\ ${a})`)} in (east, north) components.`, `Magnitude ${m(`\\sqrt{${a}^2 + ${b}^2} = ${sf(Math.hypot(a, b))}\\ \\text{m s}^{-1}`)}.`, bstep]
       };
     } },
     { name: 'River crossing', level: 2, fn() {
@@ -844,7 +834,7 @@ const G = (() => {
       const t = -dot(r0, v) / dot(v, v); if (t <= 0) return this.fn();
       const rc = add(r0, scale(t, v));
       return {
-        q: `At noon ship ${m('Q')} is at ${m(`(${ijk(r0)})`)} km relative to ship ${m('P')}, and its velocity relative to ${m('P')} is ${m(`(${ijk(v)})`)} km h⁻¹. Find the time (hours after noon) of closest approach and the least distance.`,
+        q: `At noon ship ${m('Q')} is at ${m(`${ijk(r0)}`)} km relative to ship ${m('P')}, and its velocity relative to ${m('P')} is ${m(`${ijk(v)}`)} km h⁻¹. Find the time (hours after noon) of closest approach and the least distance.`,
         fields: [N('Time', t, 'h'), N('Least distance', mag(rc), 'km')],
         steps: [`${m(`\\vec{r}(t) = ${tup(r0)} + t${tup(v)}`)}.`, `Closest when ${m('\\vec{r}\\cdot\\vec{v} = 0')}: ${m(`t = -\\dfrac{\\vec{r}_0\\cdot\\vec{v}}{|\\vec{v}|^2} = \\dfrac{${-dot(r0, v)}}{${dot(v, v)}} = ${sf(t)}\\ \\text{h}`)}.`,
           `${m(`\\vec{r} = ${tup(rc, sf)}`)}, distance ${m(`= ${sf(mag(rc))}\\ \\text{km}`)}.`]
@@ -858,7 +848,7 @@ const G = (() => {
       const r0 = [int(-5, 5), int(-5, 5)], v = [nz(-6, 6), nz(-6, 6)], t = step(1, 10, 0.5);
       const r = add(r0, scale(t, v));
       return {
-        q: `A particle starts at ${m(`\\vec{r}_0 = (${ijk(r0)})\\ \\text{m}`)} and moves with constant velocity ${m(`(${ijk(v)})\\ \\text{m s}^{-1}`)}. Find its position after ${num(t)} s and its distance from its starting point.`,
+        q: `A particle starts at ${m(`\\vec{r}_0 = ${ijk(r0)}\\ \\text{m}`)} and moves with constant velocity ${m(`${ijk(v)}\\ \\text{m s}^{-1}`)}. Find its position after ${num(t)} s and its distance from its starting point.`,
         fields: [N(m('x'), r[0], 'm'), N(m('y'), r[1], 'm'), N('Distance from start', t * mag(v), 'm')],
         steps: [`${m(`\\vec{r} = \\vec{r}_0 + \\vec{v}t = ${tup(r0)} + ${num(t)}${tup(v)} = ${tup(r)}`)} m.`, `Distance from start ${m(`= |\\vec{v}t| = ${num(t)}\\sqrt{${dot(v, v)}} = ${sf(t * mag(v))}\\ \\text{m}`)}.`]
       };
@@ -867,7 +857,7 @@ const G = (() => {
       const u = [nz(-8, 8), nz(-8, 8)], a = [int(-3, 3), int(-3, 3)], t = int(2, 6);
       const v = add(u, scale(t, a)), r = add(scale(t, u), scale(0.5 * t * t, a));
       return {
-        q: `A particle starts at the origin with ${m(`\\vec{u} = (${ijk(u)})\\ \\text{m s}^{-1}`)} and constant acceleration ${m(`\\vec{a} = (${ijk(a)})\\ \\text{m s}^{-2}`)}. Find its velocity and position after ${t} s.`,
+        q: `A particle starts at the origin with ${m(`\\vec{u} = ${ijk(u)}\\ \\text{m s}^{-1}`)} and constant acceleration ${m(`\\vec{a} = ${ijk(a)}\\ \\text{m s}^{-2}`)}. Find its velocity and position after ${t} s.`,
         fields: [N(m('v_x'), v[0], 'm s⁻¹'), N(m('v_y'), v[1], 'm s⁻¹'), N(m('x'), r[0], 'm'), N(m('y'), r[1], 'm')],
         steps: [`${m(`\\vec{v} = \\vec{u} + \\vec{a}t = ${tup(u)} + ${t}${tup(a)} = ${tup(v)}`)}.`, `${m(`\\vec{r} = \\vec{u}t + \\tfrac12\\vec{a}t^2 = ${t}${tup(u)} + ${num(0.5 * t * t)}${tup(a)} = ${tup(r)}`)}.`]
       };
@@ -876,9 +866,9 @@ const G = (() => {
       const ux = int(5, 25), uy = int(5, 25);
       const T = 2 * uy / g, Rg = ux * T, H = uy * uy / (2 * g);
       return {
-        q: `A ball is projected from ground level with ${m(`\\vec{u} = (${ux}\\hat{\\imath} + ${uy}\\hat{\\jmath})\\ \\text{m s}^{-1}`)} (${m('\\hat{\\jmath}')} vertically up, ${m('g = 9.81\\ \\text{m s}^{-2}')}). Find the time of flight, the range and the maximum height.`,
+        q: `A ball is projected from ground level with a horizontal velocity component of ${ux} m s⁻¹ and a vertical (upward) component of ${uy} m s⁻¹ (${m('g = 9.81\\ \\text{m s}^{-2}')}). Find the time of flight, the range and the maximum height.`,
         fields: [N('Time of flight', T, 's'), N('Range', Rg, 'm'), N('Max height', H, 'm')],
-        steps: [`${m(`\\vec{r} = ${ux}t\\,\\hat{\\imath} + (${uy}t - 4.905t^2)\\hat{\\jmath}`)}.`, `Lands when ${m(`${uy}t - 4.905t^2 = 0`)} → ${m(`t = ${sf(T)}\\ \\text{s}`)}.`,
+        steps: [`Treat the components separately: ${m(`x = ${ux}t`)} (constant velocity), ${m(`y = ${uy}t - 4.905t^2`)} (constant acceleration).`, `Lands when ${m(`${uy}t - 4.905t^2 = 0`)} → ${m(`t = ${sf(T)}\\ \\text{s}`)}.`,
           `Range ${m(`= ${ux}\\times${sf(T)} = ${sf(Rg)}\\ \\text{m}`)}.`, `Max height when ${m('v_y = 0')}: ${m(`H = \\dfrac{${uy}^2}{2(9.81)} = ${sf(H)}\\ \\text{m}`)}.`]
       };
     } },
@@ -886,7 +876,7 @@ const G = (() => {
       const mm = step(0.5, 5, 0.5), F = [nz(-8, 8), nz(-8, 8)], t = int(2, 6);
       const a = scale(1 / mm, F), r = scale(0.5 * t * t, a);
       return {
-        q: `A ${num(mm)} kg particle starts from rest at the origin under a constant force ${m(`\\vec{F} = (${ijk(F)})\\ \\text{N}`)}. Find its acceleration and its position after ${t} s.`,
+        q: `A ${num(mm)} kg particle starts from rest at the origin under a constant force ${m(`\\vec{F} = ${ijk(F)}\\ \\text{N}`)}. Find its acceleration and its position after ${t} s.`,
         fields: [N(m('a_x'), a[0], 'm s⁻²'), N(m('a_y'), a[1], 'm s⁻²'), N(m('x'), r[0], 'm'), N(m('y'), r[1], 'm')],
         steps: [`${m(`\\vec{a} = \\vec{F}/m = ${tup(a, sf)}\\ \\text{m s}^{-2}`)}.`, `${m(`\\vec{r} = \\tfrac12\\vec{a}t^2 = ${num(0.5 * t * t)}${tup(a, sf)} = ${tup(r, sf)}\\ \\text{m}`)}.`]
       };
@@ -895,8 +885,8 @@ const G = (() => {
       const r1 = [int(-10, 20), int(-10, 20)], r2 = [int(-10, 20), int(-10, 20)], t1 = int(0, 4), t2 = t1 + int(2, 6);
       const av = scale(1 / (t2 - t1), sub(r2, r1));
       return {
-        q: `A robot is at ${m(`(${ijk(r1)})`)} m at ${m(`t = ${t1}`)} s and at ${m(`(${ijk(r2)})`)} m at ${m(`t = ${t2}`)} s. Find its average velocity and the magnitude of the average velocity.`,
-        fields: [N(m('\\hat{\\imath}'), av[0], 'm s⁻¹'), N(m('\\hat{\\jmath}'), av[1], 'm s⁻¹'), N('Magnitude', mag(av), 'm s⁻¹')],
+        q: `A robot is at ${m(`${ijk(r1)}`)} m at ${m(`t = ${t1}`)} s and at ${m(`${ijk(r2)}`)} m at ${m(`t = ${t2}`)} s. Find its average velocity and the magnitude of the average velocity.`,
+        fields: [N(m('x') + '-component', av[0], 'm s⁻¹'), N(m('y') + '-component', av[1], 'm s⁻¹'), N('Magnitude', mag(av), 'm s⁻¹')],
         steps: [`${m(`\\Delta\\vec{r} = ${tup(sub(r2, r1))}`)} m, ${m(`\\Delta t = ${t2 - t1}`)} s.`, `${m(`\\vec{v}_{\\text{avg}} = \\Delta\\vec{r}/\\Delta t = ${tup(av, sf)}\\ \\text{m s}^{-1}`)}, magnitude ${m(sf(mag(av)))} m s⁻¹.`, 'You cannot find the average speed — the path length is unknown.']
       };
     } }
@@ -936,14 +926,13 @@ const G = (() => {
 
   // ======================================================================
   const NQ = [
-    ['In print a vector is written in bold, \\(\\mathbf{v}\\). How must you write it by hand?', ['\\(\\vec{v}\\) or \\(\\underline{v}\\)', '\\(v\\)', '\\(|v|\\)', '\\(\\hat{v}\\)'], 'You cannot write bold by hand, so add an arrow or underline. A plain \\(v\\) means the magnitude.'],
-    ['What does \\(|\\vec{a}|\\) represent?', ['The magnitude of \\(\\vec{a}\\) (a scalar)', 'The unit vector along \\(\\vec{a}\\)', 'The direction of \\(\\vec{a}\\)', 'The vector \\(-\\vec{a}\\)'], 'The modulus bars mean "size of" — always ≥ 0.'],
+    ['In print a vector is written in bold, \\(\\mathbf{v}\\). How must you write it by hand?', ['\\(\\vec{v}\\) or \\(\\underline{v}\\)', '\\(v\\)', '\\(|v|\\)', '\\(v^2\\)'], 'You cannot write bold by hand, so add an arrow or underline. A plain \\(v\\) means the magnitude.'],
+    ['What does \\(|\\vec{a}|\\) represent?', ['The magnitude of \\(\\vec{a}\\) (a scalar)', 'The components of \\(\\vec{a}\\)', 'The direction of \\(\\vec{a}\\)', 'The vector \\(-\\vec{a}\\)'], 'The modulus bars mean "size of" — always ≥ 0.'],
     ['\\(\\overrightarrow{PQ}\\) means…', ['The displacement from \\(P\\) to \\(Q\\)', 'The displacement from \\(Q\\) to \\(P\\)', 'The distance \\(PQ\\) (a scalar)', 'The midpoint of \\(PQ\\)'], 'Start letter first, end letter second.'],
     ['\\(\\overrightarrow{BA}\\) is equal to…', ['\\(-\\overrightarrow{AB}\\)', '\\(\\overrightarrow{AB}\\)', '\\(|\\overrightarrow{AB}|\\)', '\\(\\vec{0}\\)'], 'Reversing the letters reverses the direction.'],
-    ['\\(\\hat{a}\\) ("a-hat") is…', ['The unit vector in the direction of \\(\\vec{a}\\)', '\\(\\vec{a}\\) rotated by 90°', 'The magnitude of \\(\\vec{a}\\)', 'The \\(x\\)-component of \\(\\vec{a}\\)'], '\\(\\hat{a} = \\vec{a}/|\\vec{a}|\\), magnitude 1.'],
-    ['\\(\\hat{\\jmath}\\) is the unit vector along…', ['\\(+y\\)', '\\(+x\\)', '\\(+z\\)', '\\(-y\\)'], '\\(\\hat{\\imath}, \\hat{\\jmath}, \\hat{k}\\) point along \\(+x, +y, +z\\).'],
-    ['Which is the same vector as \\(4\\hat{\\imath} - 3\\hat{\\jmath}\\)?', ['\\(\\begin{pmatrix}4\\\\-3\\end{pmatrix}\\)', '\\(\\begin{pmatrix}-3\\\\4\\end{pmatrix}\\)', '\\(\\begin{pmatrix}4\\\\3\\end{pmatrix}\\)', '\\(1\\)'], 'Top number = \\(\\hat{\\imath}\\) coefficient, bottom = \\(\\hat{\\jmath}\\) coefficient.'],
-    ['The result of \\(\\vec{a}\\cdot\\vec{b}\\) is…', ['A scalar', 'A vector perpendicular to both', 'A unit vector', 'A vector along \\(\\vec{a}\\)'], 'Dot product → scalar (e.g. work).'],
+    ['Which column vector means "4 units in the \\(+x\\) direction and 3 units in the \\(-y\\) direction"?', ['\\(\\begin{pmatrix}4\\\\-3\\end{pmatrix}\\)', '\\(\\begin{pmatrix}-3\\\\4\\end{pmatrix}\\)', '\\(\\begin{pmatrix}4\\\\3\\end{pmatrix}\\)', '\\(1\\)'], 'Top number = \\(x\\)-component, bottom number = \\(y\\)-component. \\((4,\\ -3)\\) means the same thing.'],
+    ['A force has components \\(F_x = 6\\) N and \\(F_y = 8\\) N. Its magnitude is written…', ['\\(|\\vec{F}| = 10\\ \\text{N}\\)', '\\(\\vec{F} = 14\\ \\text{N}\\)', '\\(|\\vec{F}| = 14\\ \\text{N}\\)', '\\(\\vec{F} = -10\\ \\text{N}\\)'], '\\(\\sqrt{6^2 + 8^2} = 10\\), and a magnitude is written with modulus bars (or plain \\(F\\)).'],
+    ['The result of \\(\\vec{a}\\cdot\\vec{b}\\) is…', ['A scalar', 'A vector perpendicular to both', 'Always zero', 'A vector along \\(\\vec{a}\\)'], 'Dot product → scalar (e.g. work).'],
     ['The result of \\(\\vec{a}\\times\\vec{b}\\) is…', ['A vector perpendicular to both \\(\\vec{a}\\) and \\(\\vec{b}\\)', 'A scalar', 'A vector parallel to \\(\\vec{a}\\)', 'Always zero'], 'Cross product → vector, direction by the right-hand rule.'],
     ['\\(\\vec{v}_{AB}\\) (velocity of A relative to B) equals…', ['\\(\\vec{v}_A - \\vec{v}_B\\)', '\\(\\vec{v}_B - \\vec{v}_A\\)', '\\(\\vec{v}_A + \\vec{v}_B\\)', '\\(|\\vec{v}_A| - |\\vec{v}_B|\\)'], 'What A appears to do, seen by an observer moving with B.'],
     ['\\(\\Delta\\vec{v}\\) is calculated as…', ['final − initial', 'initial − final', 'final + initial', '|final| − |initial|'], 'Change is always final minus initial — as vectors.'],
@@ -959,8 +948,7 @@ const G = (() => {
     ['A wind "from the north" blows towards…', ['The south', 'The north', 'The east', 'The west'], 'Winds are named by where they come from.'],
     ['\\(\\vec{a} = \\vec{b}\\) means the vectors have…', ['The same magnitude and the same direction', 'The same magnitude only', 'The same starting point', 'The same direction only'], 'Where they are drawn does not matter.'],
     ['An aircraft\'s <em>heading</em> is…', ['The direction it points (its velocity relative to the air)', 'Its actual path over the ground', 'The direction of the wind', 'Its ground speed'], 'The actual path is the track.'],
-    ['\\(\\hat{\\imath}\\times\\hat{\\jmath} = \\)', ['\\(\\hat{k}\\)', '\\(-\\hat{k}\\)', '\\(0\\)', '\\(1\\)'], 'Cyclic order i → j → k.'],
-    ['\\(\\hat{\\imath}\\cdot\\hat{\\jmath} = \\)', ['\\(0\\)', '\\(1\\)', '\\(\\hat{k}\\)', '\\(-1\\)'], 'Perpendicular unit vectors: cos 90° = 0.'],
+    ['\\(F_x\\) and \\(F_y\\) are…', ['The components of \\(\\vec{F}\\) along the \\(x\\)- and \\(y\\)-axes', 'Two different forces', 'The magnitude and direction of \\(\\vec{F}\\)', 'The unit of force'], 'Together the components have exactly the same effect as \\(\\vec{F}\\).'],
     ['Which symbol means "sum of"?', ['\\(\\Sigma\\)', '\\(\\Delta\\)', '\\(\\lambda\\)', '\\(\\theta\\)'], 'Capital sigma. \\(\\Delta\\) means "change in".'],
     ['Which of these is written correctly as a vector answer?', ['\\(12\\ \\text{N}\\) at 30° above the horizontal', '\\(12\\ \\text{N}\\)', '\\(\\vec{F} = 12\\ \\text{N}\\)', '\\(30^\\circ\\)'], 'A vector answer needs magnitude and a referenced direction.']
   ];

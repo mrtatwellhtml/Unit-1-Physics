@@ -6,9 +6,9 @@ An interactive website that goes with *CAPE® Physics Unit 1 — Topic Workbook 
 
 | Page | What it does |
 |---|---|
-| **Notation** | How to read, say and hand-write every symbol: bold vs arrow vs underline, \|a\|, AB-arrow, î ĵ k̂, a-hat, column vectors, dot and cross, v<sub>AB</sub>, Δ, Σ, bearings vs angles from +x, units like m s⁻¹, Greek letters, and exam vocabulary. Ends with a notation quiz. |
+| **Notation** | How to read, say and hand-write every symbol: bold vs arrow vs underline, \|a\|, AB-arrow, components (F<sub>x</sub>, F<sub>y</sub>), column vectors, dot and cross, v<sub>AB</sub>, Δ, Σ, bearings vs angles from +x, units like m s⁻¹, Greek letters, and exam vocabulary. Ends with a notation quiz. |
 | **Lessons V1–V16** | One lesson for each workbook section, with *What you need*, worked examples, diagrams, the *Examiner's trap* boxes, and the CAPE syllabus reference. V11, V12 and V16 are marked **Beyond CAPE**. |
-| **Practice** | 79 question types across the 16 sections, labelled L1 (Foundation), L2 (CAPE standard) or L3 (College). Answers are auto-marked; students can type fractions, `sqrt(…)` or `1.6e-19`. |
+| **Practice** | 77 question types across the 16 sections, labelled L1 (Foundation), L2 (CAPE standard) or L3 (College). Answers are auto-marked; students can type fractions, `sqrt(…)` or `1.6e-19`. |
 | **Mixed test** | 10 random questions from across the topic, one attempt each, with a summary that points to the sections to revise. |
 | **MCQ bank** | The 30 M2 Paper 01-style items, each with an explanation of why the wrong options are wrong. |
 | **Playground** | Drag two vectors to see the sum, difference, components, projection, dot product and cross product change live. |

@@ -365,7 +365,7 @@
         <tr><td>a − b</td><td>(${f1(d[0])}, ${f1(d[1])})</td><td>${f(U.mag(d))}</td><td>${angStr(d)}</td></tr>
         <tr><td>a · b</td><td colspan="3">${f1(dt)} ${Math.abs(dt) < 1e-9 && ma && mb ? '← perpendicular!' : ''}</td></tr>
         <tr><td>angle between</td><td colspan="3">${isNaN(between) ? '—' : U.ang(between) + '°'}</td></tr>
-        <tr><td>a × b</td><td colspan="3">${f1(cz)} k̂ ${Math.abs(cz) < 1e-9 && ma && mb ? '← parallel!' : ''} &nbsp; (|a × b| = parallelogram area ${f1(Math.abs(cz))})</td></tr>
+        <tr><td>a × b</td><td colspan="3">${f1(cz)} (z-component; + = anticlockwise) ${Math.abs(cz) < 1e-9 && ma && mb ? '← parallel!' : ''} &nbsp; (|a × b| = parallelogram area ${f1(Math.abs(cz))})</td></tr>
         <tr><td>proj. of a on b</td><td colspan="3">${mb ? f(dt / mb) : '—'}</td></tr>`;
     }
     const toUnits = e => {

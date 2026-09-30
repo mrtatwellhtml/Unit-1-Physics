@@ -22,19 +22,19 @@ const NOTATION_HTML = String.raw`
 </table></div>
 <div class="box trap"><h4>Examiner's trap</h4><p>A magnitude is <strong>never negative</strong>, but a <em>component</em> can be. \(|\vec{a}| = -5\) is always wrong; \(a_x = -5\) is fine (it means 5 units in the \(-x\) direction).</p></div>
 
-<h2>3. Unit vectors and component form</h2>
+<h2>3. Components and column vectors</h2>
+<p>At CAPE level you describe a vector in one of two ways: by its <strong>magnitude and direction</strong> ("12 N at 30° above the horizontal"), or by its <strong>components</strong> along two perpendicular axes.</p>
 <div class="table-wrap"><table>
 <tr><th>Notation</th><th>Say it as</th><th>Meaning</th></tr>
-<tr><td>\(\hat{\imath},\ \hat{\jmath},\ \hat{k}\)</td><td>"i-hat, j-hat, k-hat"</td><td>Unit vectors (magnitude 1) along \(+x\), \(+y\), \(+z\). By hand: \(\hat{\imath}\) or \(\underline{i}\).</td></tr>
-<tr><td>\(\hat{a}\)</td><td>"a-hat"</td><td>The unit vector in the direction of \(\vec{a}\): \(\hat{a} = \dfrac{\vec{a}}{|\vec{a}|}\).</td></tr>
-<tr><td>\(3\hat{\imath} - 2\hat{\jmath} + 5\hat{k}\)</td><td>"3 i minus 2 j plus 5 k"</td><td>3 units along \(x\), 2 units along \(-y\), 5 units along \(z\).</td></tr>
-<tr><td>\(\begin{pmatrix}3\\-2\\5\end{pmatrix}\)</td><td>"column vector 3, −2, 5"</td><td>Exactly the same vector as the line above, written as a column.</td></tr>
-<tr><td>\((3,\ -2,\ 5)\)</td><td></td><td>Bracket form: the coordinates of a point, or a vector — read the context.</td></tr>
-<tr><td>\(a_x,\ a_y,\ a_z\)</td><td>"a-x, a-y, a-z"</td><td>The <strong>components</strong> of \(\vec{a}\): scalars (with signs) so that \(\vec{a} = a_x\hat{\imath} + a_y\hat{\jmath} + a_z\hat{k}\).</td></tr>
+<tr><td>\(F_x,\ F_y\)</td><td>"F-x, F-y"</td><td>The <strong>components</strong> of \(\vec{F}\) along the \(x\)- and \(y\)-axes. They are scalars with signs: \(F_x = -5\ \text{N}\) means 5 N in the \(-x\) direction.</td></tr>
+<tr><td>\(F_\parallel,\ F_\perp\)</td><td>"F parallel, F perpendicular"</td><td>Components along and at right angles to a chosen direction (e.g. a slope).</td></tr>
+<tr><td>\(\begin{pmatrix}6\\-8\end{pmatrix}\)</td><td>"column vector 6, −8"</td><td>A vector with \(x\)-component 6 and \(y\)-component −8. The top number is always \(x\).</td></tr>
+<tr><td>\((6,\ -8)\)</td><td>"6, minus 8"</td><td>Bracket form: the same components written in a row. Also used for the coordinates of a point — read the context.</td></tr>
+<tr><td>\((3,\ -2,\ 5)\)</td><td></td><td>A vector (or point) in three dimensions: \(x\), \(y\), \(z\) components.</td></tr>
 </table></div>
-<div class="box nota"><h4>All three mean the same thing</h4>
-\[ \vec{F} = 6\hat{\imath} - 8\hat{\jmath}\ \text{N} \quad = \quad \begin{pmatrix}6\\-8\end{pmatrix}\text{N} \quad = \quad (6,\ -8)\ \text{N} \]
-<p>Use whichever form the question uses. The \(\hat{\imath}\hat{\jmath}\hat{k}\) form is best for CAPE working because each term is clearly labelled.</p></div>
+<div class="box nota"><h4>These all describe the same force</h4>
+\[ F_x = 6\ \text{N},\ F_y = -8\ \text{N} \quad = \quad \begin{pmatrix}6\\-8\end{pmatrix}\text{N} \quad = \quad (6,\ -8)\ \text{N} \quad = \quad 10\ \text{N at } 53.1^\circ \text{ below the } +x \text{ axis} \]
+<p>In a CAPE answer, writing the components out in words and symbols (\(F_x = \ldots\), \(F_y = \ldots\)) is the clearest way to show your working.</p></div>
 
 <h2>4. Operations</h2>
 <div class="table-wrap"><table>
@@ -71,8 +71,8 @@ const NOTATION_HTML = String.raw`
 
 <h2>7. Directions: angles and bearings</h2>
 <div class="grid">
-<div class="card"><h3>Angle from +x</h3><p>Measured <strong>anticlockwise</strong> from the positive \(x\)-axis, 0° to 360°.</p><p>\(\vec{F} = F\cos\theta\,\hat{\imath} + F\sin\theta\,\hat{\jmath}\)</p><p class="muted small">Example: 20 N at 150° → \(-17.3\hat{\imath} + 10\hat{\jmath}\) N.</p></div>
-<div class="card"><h3>Bearing</h3><p>Measured <strong>clockwise from north</strong>, always <strong>three figures</strong>: 045°, 270°, 008°.</p><p>With \(\hat{\imath}\) = east, \(\hat{\jmath}\) = north: \(\vec{d} = d\sin\beta\,\hat{\imath} + d\cos\beta\,\hat{\jmath}\)</p><p class="muted small">Note the sin/cos swap compared with angles from +x.</p></div>
+<div class="card"><h3>Angle from +x</h3><p>Measured <strong>anticlockwise</strong> from the positive \(x\)-axis, 0° to 360°.</p><p>\(F_x = F\cos\theta,\ \ F_y = F\sin\theta\)</p><p class="muted small">Example: 20 N at 150° → \(F_x = -17.3\) N, \(F_y = 10\) N.</p></div>
+<div class="card"><h3>Bearing</h3><p>Measured <strong>clockwise from north</strong>, always <strong>three figures</strong>: 045°, 270°, 008°.</p><p>East component \(= d\sin\beta\), north component \(= d\cos\beta\).</p><p class="muted small">Note the sin/cos swap compared with angles from +x.</p></div>
 <div class="card"><h3>Words</h3><p>"30° above the −x axis", "N 40° E" (40° east of north = bearing 040°), "S 20° W" (bearing 200°). A wind "from the west" blows <em>towards</em> the east.</p></div>
 </div>
 
@@ -104,9 +104,9 @@ const NOTATION_HTML = String.raw`
 <div class="box tip"><h4>Handwriting checklist for exam scripts</h4>
 <ul>
 <li>Every vector symbol gets an arrow or an underline: \(\vec{F}\), \(\underline{F}\). Its magnitude does not: \(F\).</li>
-<li>Write \(\hat{\imath}, \hat{\jmath}, \hat{k}\) with hats (or underlined) — plain i, j, k are ambiguous.</li>
+<li>Label components clearly with subscripts: \(F_x\), \(F_y\), or "horizontal component", "vertical component".</li>
 <li>Never write "\(\vec{a} = 5\)". Write \(|\vec{a}| = 5\) or \(a = 5\).</li>
-<li>A dot product answer has <strong>no</strong> \(\hat{\imath},\hat{\jmath},\hat{k}\): \(W = 56\ \text{J}\), not \(56\hat{\imath}\ \text{J}\).</li>
+<li>Work is a scalar: write \(W = 56\ \text{J}\) — never give work a direction.</li>
 <li>Always state a direction with a reference: "12 N at 30° above the horizontal", "5.0 km on a bearing of 053°".</li>
 </ul></div>
 `;
@@ -222,7 +222,7 @@ const TOPICS = [
 <p><strong>Always check:</strong> \(F_x^2 + F_y^2 = F^2\), and neither component can be bigger than \(F\).</p>
 
 <h3>Bearings into components</h3>
-<p>With \(\hat{\imath}\) east and \(\hat{\jmath}\) north, a displacement \(d\) on bearing \(\beta\) is \(d\sin\beta\,\hat{\imath} + d\cos\beta\,\hat{\jmath}\). E.g. 20 km on 035°: \(11.5\hat{\imath} + 16.4\hat{\jmath}\) km.</p>`
+<p>Taking east and north as the axes, a displacement \(d\) on bearing \(\beta\) has east component \(d\sin\beta\) and north component \(d\cos\beta\). E.g. 20 km on 035°: 11.5 km east and 16.4 km north.</p>`
 },
 {
   id: 'V4', title: 'Magnitude and Direction from Components; Bearings', cape: 'Module 1 · 1.5; 3.1–3.7', workbook: 'V4.1 – V4.13', fig: 'v4',
@@ -316,29 +316,29 @@ const TOPICS = [
 <div class="box trap"><h4>Examiner's trap</h4><p>Using \(R^2 = P^2 + Q^2 - 2PQ\cos\theta\) with \(\theta\) the angle <em>between</em> the vectors gives \(|\vec{P} - \vec{Q}|\), not \(|\vec{P} + \vec{Q}|\). Decide: is your angle <strong>between the vectors</strong> (use +) or <strong>inside the triangle</strong> (use −)?</p></div>`
 },
 {
-  id: 'V7', title: 'Unit Vectors, Component Notation and 3-D', cape: 'Toolkit for Module 1 · 3.x', workbook: 'V7.1 – V7.17',
+  id: 'V7', title: 'Component Form and 3-D Vectors', cape: 'Toolkit for Module 1 · 3.x', workbook: 'V7.1 – V7.17',
   html: String.raw`
 <div class="box need"><h4>What you need</h4>
-<p>\(\hat{\imath}, \hat{\jmath}, \hat{k}\) have magnitude 1 and point along \(+x, +y, +z\). Any vector can be written</p>
-\[ \vec{a} = a_x\hat{\imath} + a_y\hat{\jmath} + a_z\hat{k} = \begin{pmatrix}a_x\\a_y\\a_z\end{pmatrix} \]
-<p>Operations are done <strong>component by component</strong>: \(\vec{a} \pm \vec{b} = (a_x \pm b_x)\hat{\imath} + (a_y \pm b_y)\hat{\jmath} + (a_z \pm b_z)\hat{k}\), and \(\lambda\vec{a} = \lambda a_x\hat{\imath} + \lambda a_y\hat{\jmath} + \lambda a_z\hat{k}\).</p></div>
+<p>A vector can be written by its components as a column vector or in brackets. In two dimensions \(\vec{a} = \begin{pmatrix}a_x\\a_y\end{pmatrix} = (a_x,\ a_y)\); in three dimensions add a \(z\)-component:</p>
+\[ \vec{a} = \begin{pmatrix}a_x\\a_y\\a_z\end{pmatrix} = (a_x,\ a_y,\ a_z) \]
+<p>Operations are done <strong>component by component</strong>: \(\vec{a} \pm \vec{b} = (a_x \pm b_x,\ a_y \pm b_y,\ a_z \pm b_z)\), and \(\lambda\vec{a} = (\lambda a_x,\ \lambda a_y,\ \lambda a_z)\).</p></div>
 
-<h3>Magnitude and unit vector</h3>
-\[ |\vec{a}| = \sqrt{a_x^2 + a_y^2 + a_z^2}, \qquad \hat{a} = \frac{\vec{a}}{|\vec{a}|} \]
-<p>A vector of magnitude \(k\) in the direction of \(\vec{a}\) is \(k\hat{a}\).</p>
+<h3>Magnitude</h3>
+\[ |\vec{a}| = \sqrt{a_x^2 + a_y^2 + a_z^2} \qquad \text{(Pythagoras, applied twice)} \]
+<p>To get a vector of magnitude \(k\) in the same direction as \(\vec{a}\), multiply every component by \(k/|\vec{a}|\).</p>
 
 <h3>Direction cosines</h3>
 <p>If \(\vec{a}\) makes angles \(\alpha, \beta, \gamma\) with the \(x, y, z\) axes:</p>
 \[ \cos\alpha = \frac{a_x}{|\vec{a}|},\quad \cos\beta = \frac{a_y}{|\vec{a}|},\quad \cos\gamma = \frac{a_z}{|\vec{a}|}, \qquad \cos^2\alpha + \cos^2\beta + \cos^2\gamma = 1 \]
 
 <div class="box example"><h4>Worked example</h4>
-<p>For \(\vec{a} = 2\hat{\imath} - \hat{\jmath} - 2\hat{k}\), find \(|\vec{a}|\), \(\hat{a}\), and the angles with the axes.</p>
+<p>For \(\vec{a} = (2,\ -1,\ -2)\), find \(|\vec{a}|\), a vector of magnitude 6 in the same direction, and the angles with the axes.</p>
 <ol class="steps"><li>\(|\vec{a}| = \sqrt{4 + 1 + 4} = 3\).</li>
-<li>\(\hat{a} = \tfrac{2}{3}\hat{\imath} - \tfrac{1}{3}\hat{\jmath} - \tfrac{2}{3}\hat{k}\).</li>
+<li>Magnitude 6: multiply by \(6/3 = 2\) → \((4,\ -2,\ -4)\).</li>
 <li>\(\alpha = \cos^{-1}(2/3) = 48.2^\circ\), \(\beta = \cos^{-1}(-1/3) = 109.5^\circ\), \(\gamma = \cos^{-1}(-2/3) = 131.8^\circ\).</li></ol></div>
 
 <h3>Parallel and equal vectors</h3>
-<p>\(\vec{a}\parallel\vec{b}\) if and only if \(\vec{a} = \lambda\vec{b}\) — every component in the same ratio. E.g. \(3\hat{\imath} + k\hat{\jmath} - 2\hat{k}\) is parallel to \(-6\hat{\imath} + 8\hat{\jmath} + 4\hat{k}\) when \(\lambda = -\tfrac12\), so \(k = -4\). Equal vectors have every component equal: \((p+2)\hat{\imath} + 3\hat{\jmath} = 5\hat{\imath} + (q-1)\hat{\jmath}\) gives \(p = 3,\ q = 4\).</p>
+<p>\(\vec{a}\parallel\vec{b}\) if and only if \(\vec{a} = \lambda\vec{b}\) — every component in the same ratio. E.g. \((3,\ k,\ -2)\) is parallel to \((-6,\ 8,\ 4)\) when \(\lambda = -\tfrac12\), so \(k = -4\). Equal vectors have every component equal: \((p+2,\ 3) = (5,\ q-1)\) gives \(p = 3,\ q = 4\).</p>
 
 <div class="box trap"><h4>Examiner's trap</h4><p>Writing \(|\vec{a}| = a_x + a_y + a_z\) (adding components instead of Pythagoras) is the single most common error in this topic. Also: \((-3)^2 = +9\), but typing <code>-3²</code> on many calculators gives −9. Use brackets.</p></div>`
 },
@@ -356,9 +356,9 @@ const TOPICS = [
 <p>Notice the "cross-over": \(m\) goes with \(\vec{b}\). Check with the midpoint (\(m = n\)).</p>
 
 <div class="box example"><h4>Worked example</h4>
-<p>\(\vec{a} = 2\hat{\imath} - \hat{\jmath} + 4\hat{k}\), \(\vec{b} = 7\hat{\imath} + 9\hat{\jmath} - \hat{k}\). Find \(P\) with \(AP : PB = 2 : 3\).</p>
-<ol class="steps"><li>\(\vec{p} = \dfrac{3\vec{a} + 2\vec{b}}{5} = \dfrac{(6 + 14)\hat{\imath} + (-3 + 18)\hat{\jmath} + (12 - 2)\hat{k}}{5}\).</li>
-<li>\(\vec{p} = 4\hat{\imath} + 3\hat{\jmath} + 2\hat{k}\).</li></ol></div>
+<p>\(\vec{a} = (2,\ -1,\ 4)\), \(\vec{b} = (7,\ 9,\ -1)\). Find \(P\) with \(AP : PB = 2 : 3\).</p>
+<ol class="steps"><li>\(\vec{p} = \dfrac{3\vec{a} + 2\vec{b}}{5} = \dfrac{(6 + 14,\ -3 + 18,\ 12 - 2)}{5}\).</li>
+<li>\(\vec{p} = (4,\ 3,\ 2)\).</li></ol></div>
 
 <h3>Collinearity</h3>
 <p>\(A, B, C\) lie on one straight line if \(\overrightarrow{AC} = \lambda\overrightarrow{AB}\) for some scalar \(\lambda\) (parallel <em>and</em> sharing the point \(A\)).</p>
@@ -379,46 +379,44 @@ const TOPICS = [
 \[ \vec{a}\cdot\vec{b} = |\vec{a}||\vec{b}|\cos\theta \qquad (0 \le \theta \le 180^\circ,\ \text{vectors drawn tail-to-tail}) \]
 <p>The result is a <strong>scalar</strong>. In components:</p>
 \[ \vec{a}\cdot\vec{b} = a_xb_x + a_yb_y + a_zb_z \]
-<p>because \(\hat{\imath}\cdot\hat{\imath} = \hat{\jmath}\cdot\hat{\jmath} = \hat{k}\cdot\hat{k} = 1\) and \(\hat{\imath}\cdot\hat{\jmath} = \hat{\jmath}\cdot\hat{k} = \hat{k}\cdot\hat{\imath} = 0\).</p></div>
+<p>Multiply matching components and add. For CAPE the key form is \(W = Fs\cos\theta\): only the component of the force along the displacement does work.</p></div>
 
 <h3>What it's used for</h3>
 <ul><li><strong>Angle between vectors:</strong> \(\cos\theta = \dfrac{\vec{a}\cdot\vec{b}}{|\vec{a}||\vec{b}|}\).</li>
 <li><strong>Perpendicular test:</strong> non-zero \(\vec{a} \perp \vec{b} \iff \vec{a}\cdot\vec{b} = 0\). Also \(\vec{a}\cdot\vec{a} = |\vec{a}|^2\).</li>
-<li><strong>Projection:</strong> the component of \(\vec{a}\) along \(\vec{b}\) is \(\vec{a}\cdot\hat{b} = \dfrac{\vec{a}\cdot\vec{b}}{|\vec{b}|}\); the vector projection is \(\left(\dfrac{\vec{a}\cdot\vec{b}}{|\vec{b}|^2}\right)\vec{b}\).</li>
+<li><strong>Projection:</strong> the component of \(\vec{a}\) along \(\vec{b}\) is \(a\cos\theta = \dfrac{\vec{a}\cdot\vec{b}}{|\vec{b}|}\).</li>
 <li><strong>Physics:</strong> work \(W = \vec{F}\cdot\vec{s}\); power \(P = \vec{F}\cdot\vec{v}\); magnetic flux \(\Phi = \vec{B}\cdot\vec{A}\). Only the component of one vector along the other matters.</li></ul>
 
 <div class="box example"><h4>Worked example</h4>
-<p>Find the angle between \(\vec{a} = 3\hat{\imath} + 4\hat{\jmath}\) and \(\vec{b} = 5\hat{\imath} + 12\hat{\jmath}\).</p>
+<p>Find the angle between \(\vec{a} = (3,\ 4)\) and \(\vec{b} = (5,\ 12)\).</p>
 <ol class="steps"><li>\(\vec{a}\cdot\vec{b} = 3(5) + 4(12) = 63\).</li>
 <li>\(|\vec{a}| = 5\), \(|\vec{b}| = 13\).</li>
 <li>\(\cos\theta = 63/65\) → \(\theta = 14.3^\circ\).</li></ol></div>
 
 <div class="box example"><h4>Worked example — work</h4>
-<p>\(\vec{F} = (12\hat{\imath} + 5\hat{\jmath})\) N moves its point of application through \(\vec{s} = (3\hat{\imath} + 4\hat{\jmath})\) m. Find the work done.</p>
+<p>A force \(\vec{F} = (12,\ 5)\) N moves its point of application through \(\vec{s} = (3,\ 4)\) m. Find the work done.</p>
 <ol class="steps"><li>\(W = \vec{F}\cdot\vec{s} = 12(3) + 5(4) = 56\) J.</li></ol></div>
 
-<div class="box trap"><h4>Examiner's trap</h4><p>Work is a <strong>scalar</strong>. Writing \(W = (12\hat{\imath} + 5\hat{\jmath})\) J, or giving work a direction, loses the mark. A dot product answer never contains \(\hat{\imath}, \hat{\jmath}, \hat{k}\).</p></div>
+<div class="box trap"><h4>Examiner's trap</h4><p>Work is a <strong>scalar</strong>. Writing \(W = (12,\ 5)\) J, or giving work a direction, loses the mark. A dot product answer is always a single number.</p></div>
 <p>Algebra rules: commutative (\(\vec{a}\cdot\vec{b} = \vec{b}\cdot\vec{a}\)) and distributive (\(\vec{a}\cdot(\vec{b} + \vec{c}) = \vec{a}\cdot\vec{b} + \vec{a}\cdot\vec{c}\)).</p>`
 },
 {
   id: 'V10', title: 'The Vector (Cross) Product', cape: 'Module 1 · 4.x moments / torque', workbook: 'V10.1 – V10.17',
   html: String.raw`
 <div class="box need"><h4>What you need</h4>
-\[ \vec{a}\times\vec{b} = |\vec{a}||\vec{b}|\sin\theta\ \hat{n} \]
-<p>\(\hat{n}\) is the unit vector perpendicular to both \(\vec{a}\) and \(\vec{b}\), given by the <strong>right-hand rule</strong>: curl the fingers of your right hand from \(\vec{a}\) towards \(\vec{b}\) through the smaller angle; your thumb points along \(\vec{a}\times\vec{b}\). The result is a <strong>vector</strong>.</p></div>
+\[ |\vec{a}\times\vec{b}| = |\vec{a}||\vec{b}|\sin\theta \]
+<p>The direction is perpendicular to both \(\vec{a}\) and \(\vec{b}\), given by the <strong>right-hand rule</strong>: curl the fingers of your right hand from \(\vec{a}\) towards \(\vec{b}\) through the smaller angle; your thumb points along \(\vec{a}\times\vec{b}\). The result is a <strong>vector</strong>.</p></div>
 
-<h3>Unit vectors (cyclic order i → j → k → i)</h3>
-\[ \hat{\imath}\times\hat{\jmath} = \hat{k},\quad \hat{\jmath}\times\hat{k} = \hat{\imath},\quad \hat{k}\times\hat{\imath} = \hat{\jmath}; \qquad \hat{\jmath}\times\hat{\imath} = -\hat{k}\ \text{etc.}; \qquad \hat{\imath}\times\hat{\imath} = \vec{0} \]
-
-<h3>Determinant form</h3>
-\[ \vec{a}\times\vec{b} = \begin{vmatrix}\hat{\imath} & \hat{\jmath} & \hat{k}\\ a_x & a_y & a_z\\ b_x & b_y & b_z\end{vmatrix} = (a_yb_z - a_zb_y)\hat{\imath} - (a_xb_z - a_zb_x)\hat{\jmath} + (a_xb_y - a_yb_x)\hat{k} \]
+<h3>Component form</h3>
+\[ \vec{a}\times\vec{b} = (a_yb_z - a_zb_y,\ \ a_zb_x - a_xb_z,\ \ a_xb_y - a_yb_x) \]
+<p>Pattern: for the \(x\)-component cover up the \(x\)s and cross-multiply the \(y\) and \(z\) values; the \(y\)-component starts with \(z\); the \(z\)-component starts with \(x\) (cyclic order \(x \to y \to z \to x\)).</p>
 
 <div class="box example"><h4>Worked example</h4>
-<p>Find \((\hat{\imath} + 2\hat{\jmath} + 3\hat{k})\times(4\hat{\imath} + 5\hat{\jmath} + 6\hat{k})\).</p>
-<ol class="steps"><li>\(\hat{\imath}\): \(2(6) - 3(5) = -3\).</li>
-<li>\(\hat{\jmath}\): \(-[1(6) - 3(4)] = -(-6) = +6\).</li>
-<li>\(\hat{k}\): \(1(5) - 2(4) = -3\).</li>
-<li>Answer \(-3\hat{\imath} + 6\hat{\jmath} - 3\hat{k}\). Check: \((-3)(1) + 6(2) + (-3)(3) = 0\) ✓ perpendicular to \(\vec{a}\).</li></ol></div>
+<p>Find \((1,\ 2,\ 3)\times(4,\ 5,\ 6)\).</p>
+<ol class="steps"><li>\(x\): \(2(6) - 3(5) = -3\).</li>
+<li>\(y\): \(3(4) - 1(6) = +6\).</li>
+<li>\(z\): \(1(5) - 2(4) = -3\).</li>
+<li>Answer \((-3,\ 6,\ -3)\). Check: \((-3)(1) + 6(2) + (-3)(3) = 0\) ✓ perpendicular to \(\vec{a}\).</li></ol></div>
 
 <h3>Properties</h3>
 <ul><li>Anti-commutative: \(\vec{b}\times\vec{a} = -\vec{a}\times\vec{b}\). Distributive over addition. <em>Not</em> associative.</li>
@@ -429,11 +427,11 @@ const TOPICS = [
 <p>Torque \(\vec{\tau} = \vec{r}\times\vec{F}\) (magnitude \(rF\sin\theta\) — the CAPE "moment = force × perpendicular distance"); angular momentum \(\vec{L} = \vec{r}\times\vec{p}\); magnetic force \(\vec{F} = q\vec{v}\times\vec{B}\); rotation \(\vec{v} = \vec{\omega}\times\vec{r}\).</p>
 
 <div class="box example"><h4>Worked example — torque</h4>
-<p>\(\vec{F} = 10\hat{\imath}\) N acts at \(\vec{r} = (0.300\hat{\imath} + 0.400\hat{\jmath})\) m from a pivot. Find the torque.</p>
-<ol class="steps"><li>\(\vec{\tau} = \vec{r}\times\vec{F}\): only the \(\hat{k}\) term survives: \((0.300)(0) - (0.400)(10) = -4.00\).</li>
-<li>\(\vec{\tau} = -4.00\hat{k}\) N m — magnitude 4.00 N m, clockwise when viewed from \(+z\).</li></ol></div>
+<p>A 10 N force acts in the \(+x\) direction at a point \(\vec{r} = (0.300,\ 0.400)\) m from a pivot. Find the torque.</p>
+<ol class="steps"><li>CAPE method: moment = force × perpendicular distance from the pivot to the line of action. The line of action is horizontal and 0.400 m from the pivot, so \(\tau = 10 \times 0.400 = 4.00\) N m.</li>
+<li>Direction: the force acts to the right above the pivot, so the moment is <strong>clockwise</strong>. (The cross product gives the same: \(\vec{r}\times\vec{F} = (0,\ 0,\ -4.00)\) N m, and \(-z\) means clockwise seen from the front.)</li></ol></div>
 
-<div class="box trap"><h4>Examiner's trap</h4><p>(i) Forgetting the <strong>minus sign on the \(\hat{\jmath}\) term</strong>. (ii) Using \(|\vec{a}\times\vec{b}| = ab\sin\theta\) to find an angle — \(\sin\theta\) cannot tell \(\theta\) from \(180^\circ - \theta\). Use the dot product for angles. Always check \((\vec{a}\times\vec{b})\cdot\vec{a} = 0\).</p></div>`
+<div class="box trap"><h4>Examiner's trap</h4><p>(i) Getting the order wrong in the middle (\(y\)) component — it is \(a_zb_x - a_xb_z\). (ii) Using \(|\vec{a}\times\vec{b}| = ab\sin\theta\) to find an angle — \(\sin\theta\) cannot tell \(\theta\) from \(180^\circ - \theta\). Use the dot product for angles. Always check \((\vec{a}\times\vec{b})\cdot\vec{a} = 0\).</p></div>`
 },
 {
   id: 'V11', title: 'Triple Products', cape: 'Beyond CAPE', beyond: true, workbook: 'V11.1 – V11.10',
@@ -446,8 +444,8 @@ const TOPICS = [
 <li>Cyclic: \(\vec{a}\cdot(\vec{b}\times\vec{c}) = \vec{b}\cdot(\vec{c}\times\vec{a}) = \vec{c}\cdot(\vec{a}\times\vec{b})\); swapping two vectors changes the sign.</li></ul></div>
 
 <div class="box example"><h4>Worked example</h4>
-<p>\(\vec{a} = 2\hat{\imath} + \hat{\jmath}\), \(\vec{b} = 3\hat{\jmath} + \hat{k}\), \(\vec{c} = \hat{\imath} + 4\hat{k}\). Find the volume of the parallelepiped.</p>
-<ol class="steps"><li>\(\vec{b}\times\vec{c} = (3\cdot4 - 1\cdot0)\hat{\imath} - (0\cdot4 - 1\cdot1)\hat{\jmath} + (0\cdot0 - 3\cdot1)\hat{k} = 12\hat{\imath} + \hat{\jmath} - 3\hat{k}\).</li>
+<p>\(\vec{a} = (2,\ 1,\ 0)\), \(\vec{b} = (0,\ 3,\ 1)\), \(\vec{c} = (1,\ 0,\ 4)\). Find the volume of the parallelepiped.</p>
+<ol class="steps"><li>\(\vec{b}\times\vec{c} = (3\cdot4 - 1\cdot0,\ 1\cdot1 - 0\cdot4,\ 0\cdot0 - 3\cdot1) = (12,\ 1,\ -3)\).</li>
 <li>\(\vec{a}\cdot(\vec{b}\times\vec{c}) = 24 + 1 + 0 = 25\). Volume 25; tetrahedron \(25/6 = 4.17\).</li></ol></div>
 
 <div class="box need"><h4>Vector triple product ("BAC − CAB")</h4>
@@ -554,42 +552,42 @@ const TOPICS = [
 <p>(There is no vector version of \(v^2 = u^2 + 2as\) except \(\vec{v}\cdot\vec{v} = \vec{u}\cdot\vec{u} + 2\vec{a}\cdot\vec{s}\).)</p></div>
 
 <h3>Projectiles in vector form</h3>
-\[ \vec{a} = -g\hat{\jmath}, \quad \vec{u} = u\cos\theta\,\hat{\imath} + u\sin\theta\,\hat{\jmath}, \quad \vec{r} = (u\cos\theta\ t)\hat{\imath} + \left(u\sin\theta\ t - \tfrac12gt^2\right)\hat{\jmath} \]
+<p>Resolve the launch velocity into components and treat each direction separately:</p>
+\[ u_x = u\cos\theta,\quad u_y = u\sin\theta; \qquad x = u_x t,\quad y = u_y t - \tfrac12gt^2; \qquad v_x = u_x,\quad v_y = u_y - gt \]
 <p>Horizontal: constant velocity. Vertical: constant acceleration \(g\) downwards. At the top of the path the velocity is horizontal and the acceleration is still \(g\) downwards.</p>
 
 <div class="box example"><h4>Worked example</h4>
-<p>A particle starts at the origin with \(\vec{u} = (5\hat{\imath} + 2\hat{\jmath})\ \text{m s}^{-1}\) and \(\vec{a} = (-\hat{\imath} + 0.5\hat{\jmath})\ \text{m s}^{-2}\). Find its velocity, speed and position after 4.0 s.</p>
-<ol class="steps"><li>\(\vec{v} = (5 - 4)\hat{\imath} + (2 + 2)\hat{\jmath} = \hat{\imath} + 4\hat{\jmath}\ \text{m s}^{-1}\); speed \(= \sqrt{17} = 4.12\ \text{m s}^{-1}\).</li>
-<li>\(\vec{r} = (5\cdot4 - \tfrac12\cdot16)\hat{\imath} + (2\cdot4 + \tfrac12\cdot0.5\cdot16)\hat{\jmath} = 12\hat{\imath} + 12\hat{\jmath}\) m.</li></ol></div>
+<p>A particle starts at the origin with \(\vec{u} = (5,\ 2)\ \text{m s}^{-1}\) and \(\vec{a} = (-1,\ 0.5)\ \text{m s}^{-2}\). Find its velocity, speed and position after 4.0 s.</p>
+<ol class="steps"><li>\(\vec{v} = (5 - 4,\ 2 + 2) = (1,\ 4)\ \text{m s}^{-1}\); speed \(= \sqrt{17} = 4.12\ \text{m s}^{-1}\).</li>
+<li>\(\vec{r} = (5\cdot4 - \tfrac12\cdot16,\ 2\cdot4 + \tfrac12\cdot0.5\cdot16) = (12,\ 12)\) m.</li></ol></div>
 
 <div class="box example"><h4>Worked example — projectile</h4>
-<p>\(\vec{u} = (15\hat{\imath} + 20\hat{\jmath})\ \text{m s}^{-1}\) from ground level.</p>
+<p>A ball is launched from ground level with \(u_x = 15\ \text{m s}^{-1}\) and \(u_y = 20\ \text{m s}^{-1}\).</p>
 <ol class="steps"><li>Lands when \(20t - 4.905t^2 = 0\) → \(t = 4.08\) s.</li>
 <li>Range \(= 15 \times 4.08 = 61.2\) m. Max height \(= 20^2/(2 \times 9.81) = 20.4\) m.</li>
-<li>Landing velocity \(= 15\hat{\imath} - 20\hat{\jmath}\ \text{m s}^{-1}\) (by symmetry).</li></ol></div>
+<li>Landing velocity: \(v_x = 15\ \text{m s}^{-1}\), \(v_y = -20\ \text{m s}^{-1}\) (by symmetry) — 25 m s⁻¹ at 53.1° below the horizontal.</li></ol></div>
 
 <p>Also: average velocity \(= \Delta\vec{r}/\Delta t\); Newton II \(\vec{F} = m\vec{a}\).</p>
 <h3>With calculus (optional)</h3>
-<p>\(\vec{v} = \dfrac{d\vec{r}}{dt}\), \(\vec{a} = \dfrac{d\vec{v}}{dt}\) — differentiate each component. For circular motion \(\vec{r} = R(\cos\omega t\,\hat{\imath} + \sin\omega t\,\hat{\jmath})\) you get \(\vec{a} = -\omega^2\vec{r}\): centripetal acceleration of size \(\omega^2 R = v^2/R\).</p>`
+<p>\(\vec{v} = \dfrac{d\vec{r}}{dt}\), \(\vec{a} = \dfrac{d\vec{v}}{dt}\) — differentiate each component. For circular motion \(x = R\cos\omega t,\ y = R\sin\omega t\) you get \(\vec{a} = -\omega^2\vec{r}\): centripetal acceleration of size \(\omega^2 R = v^2/R\).</p>`
 },
 {
   id: 'V16', title: 'University Extension: Bases, Rotations, Polar Vectors, Fields', cape: 'Beyond CAPE', beyond: true, workbook: 'V16.1 – V16.8',
   html: String.raw`
 <div class="box tip"><h4>Extension</h4><p>Optional for the examination, but it completes the picture for anyone going on to university physics or engineering.</p></div>
 <div class="box need"><h4>What you need</h4>
-<p><strong>Basis.</strong> Two non-parallel vectors in a plane (three non-coplanar vectors in space) form a basis: every vector can be written uniquely as a combination of them. \(\{\hat{\imath}, \hat{\jmath}, \hat{k}\}\) is an <em>orthonormal</em> basis, which is why components equal dot products: \(a_x = \vec{a}\cdot\hat{\imath}\).</p>
+<p><strong>Basis.</strong> Two non-parallel vectors in a plane (three non-coplanar vectors in space) form a basis: every vector can be written uniquely as a combination of them. The \(x\), \(y\), \(z\) axes give an <em>orthonormal</em> (mutually perpendicular) basis, which is why ordinary components are so easy to use.</p>
 <p>Three vectors are linearly independent \(\iff\) their scalar triple product is non-zero.</p>
 <p><strong>Rotation</strong> anticlockwise through \(\theta\): \((x, y) \mapsto (x\cos\theta - y\sin\theta,\ x\sin\theta + y\cos\theta)\). Rotations preserve lengths and dot products.</p>
-<p><strong>Polar unit vectors:</strong> \(\hat{r} = \cos\theta\,\hat{\imath} + \sin\theta\,\hat{\jmath}\), \(\hat{\theta} = -\sin\theta\,\hat{\imath} + \cos\theta\,\hat{\jmath}\) — they change direction as the particle moves.</p>
 <p><strong>Vector fields</strong> assign a vector to every point, e.g. \(\vec{g}(\vec{r}) = -\dfrac{GM}{|\vec{r}|^3}\vec{r}\) (magnitude \(GM/r^2\), towards the centre). Fields from several sources add as vectors (superposition).</p></div>
 
 <div class="box example"><h4>Worked example — basis</h4>
-<p>Express \(\vec{v} = 7\hat{\imath} - \hat{\jmath}\) in terms of \(\vec{a} = \hat{\imath} + \hat{\jmath}\) and \(\vec{b} = 2\hat{\imath} - \hat{\jmath}\).</p>
+<p>Express \(\vec{v} = (7,\ -1)\) in terms of \(\vec{a} = (1,\ 1)\) and \(\vec{b} = (2,\ -1)\).</p>
 <ol class="steps"><li>\(\lambda\vec{a} + \mu\vec{b} = \vec{v}\): \(\lambda + 2\mu = 7\) and \(\lambda - \mu = -1\).</li>
 <li>Subtract: \(3\mu = 8\) → \(\mu = 8/3\), \(\lambda = 5/3\).</li></ol></div>
 
 <div class="box example"><h4>Worked example — rotation</h4>
-<p>Rotate \(3\hat{\imath} + 4\hat{\jmath}\) through 90° anticlockwise.</p>
+<p>Rotate \((3,\ 4)\) through 90° anticlockwise.</p>
 <ol class="steps"><li>\((3\cos90^\circ - 4\sin90^\circ,\ 3\sin90^\circ + 4\cos90^\circ) = (-4, 3)\). Length still 5 ✓.</li></ol></div>`
 }
 ];
@@ -637,7 +635,7 @@ const FORMULAS_HTML = String.raw`
 <div class="card"><h3>Components (V3)</h3>
 \[ F_x = F\cos\theta,\quad F_y = F\sin\theta \]
 <p>Slope: \(mg\sin\theta\) along, \(mg\cos\theta\) perpendicular.</p>
-<p>Bearing \(\beta\): \(d\sin\beta\,\hat{\imath} + d\cos\beta\,\hat{\jmath}\).</p></div>
+<p>Bearing \(\beta\): east \(= d\sin\beta\), north \(= d\cos\beta\).</p></div>
 <div class="card"><h3>Magnitude & direction (V4)</h3>
 \[ R = \sqrt{R_x^2 + R_y^2},\quad \alpha = \tan^{-1}\frac{|R_y|}{|R_x|} \]
 <p>Q1 \(\alpha\), Q2 \(180-\alpha\), Q3 \(180+\alpha\), Q4 \(360-\alpha\).</p></div>
@@ -649,7 +647,7 @@ const FORMULAS_HTML = String.raw`
 \[ c^2 = a^2 + b^2 - 2ab\cos C \]
 \[ \frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} \]</div>
 <div class="card"><h3>3-D vectors (V7)</h3>
-\[ |\vec{a}| = \sqrt{a_x^2 + a_y^2 + a_z^2},\quad \hat{a} = \frac{\vec{a}}{|\vec{a}|} \]
+\[ |\vec{a}| = \sqrt{a_x^2 + a_y^2 + a_z^2} \]
 \[ \cos\alpha = \frac{a_x}{|\vec{a}|}\ \text{etc.},\ \ \textstyle\sum\cos^2 = 1 \]</div>
 <div class="card"><h3>Position vectors (V8)</h3>
 \[ \overrightarrow{AB} = \vec{b} - \vec{a},\quad \vec{m} = \tfrac12(\vec{a} + \vec{b}) \]
@@ -676,10 +674,10 @@ const FORMULAS_HTML = String.raw`
 <p>River: \(t_{\min} = w/v\); no drift \(\sin\alpha = u/v\), speed \(\sqrt{v^2 - u^2}\).</p></div>
 <div class="card"><h3>Kinematics (V15)</h3>
 \[ \vec{v} = \vec{u} + \vec{a}t,\quad \vec{r} = \vec{r}_0 + \vec{u}t + \tfrac12\vec{a}t^2 \]
-<p>Projectile: \(\vec{a} = -g\hat{\jmath}\), \(g = 9.81\ \text{m s}^{-2}\).</p></div>
-<div class="card"><h3>Unit vector products</h3>
-\[ \hat{\imath}\cdot\hat{\imath} = 1,\ \hat{\imath}\cdot\hat{\jmath} = 0 \]
-\[ \hat{\imath}\times\hat{\jmath} = \hat{k},\ \hat{\jmath}\times\hat{k} = \hat{\imath},\ \hat{k}\times\hat{\imath} = \hat{\jmath} \]</div>
+<p>Projectile: \(a_x = 0\), \(a_y = -g\), \(g = 9.81\ \text{m s}^{-2}\).</p></div>
+<div class="card"><h3>Moments</h3>
+\[ \tau = Fd_\perp = rF\sin\theta \]
+<p>Moment = force × perpendicular distance from the pivot to the line of action.</p></div>
 </div>`;
 
 const CHECKLIST = [
@@ -691,7 +689,7 @@ const CHECKLIST = [
   ['I can work with bearings.', 'V4'],
   ['I can add several vectors by a table of components.', 'V5'],
   ['I can use the cosine and sine rules for non-perpendicular vectors, and resolve along two non-perpendicular directions.', 'V6'],
-  ['I can use i, j, k notation, unit vectors and direction cosines in 3-D.', 'V7'],
+  ['I can write vectors as components or column vectors, and find magnitudes and direction angles in 3-D.', 'V7'],
   ['I can use position vectors, the section formula and collinearity; write vector proofs.', 'V8'],
   ['I can compute a dot product; find angles, projections and work.', 'V9'],
   ['I can compute a cross product; find areas, normals and torques.', 'V10'],
@@ -700,5 +698,5 @@ const CHECKLIST = [
   ['I can solve equilibrium problems by resolving and by Lami’s theorem, including friction.', 'V13'],
   ['I can solve relative-velocity problems: rivers, wind, interception, closest approach.', 'V14'],
   ['I can use vector equations of motion, including projectiles and circular motion.', 'V15'],
-  ['I can (extension) work with bases, rotations, polar unit vectors and vector fields.', 'V16']
+  ['I can (extension) work with bases, rotations and vector fields.', 'V16']
 ];
